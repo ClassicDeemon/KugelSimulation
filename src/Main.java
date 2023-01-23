@@ -30,14 +30,13 @@ public class Main {
                 durchmesserTank = Double.parseDouble(scanner.nextLine());
                 System.out.println("Gesamthoehe des Tanks (in cm): ");
                 gesamthoeheTank = Double.parseDouble(scanner.nextLine());
-                System.out.println("Fuellhoehe des Tanks vor Einbringen der Kugeln (in cm)");
+                System.out.println("Fuellhoehe des Tanks vor Einbringen der Kugeln (in cm):");
                 fuellhoeheTank = Double.parseDouble(scanner.nextLine());
-                System.out.println("Dichte der Fluessigkeit (Werte müssen zwischen 1000 und 1300 liegen): ");
                 //Eingabeüberprüfung, ob Füllhöhe kleiner als Tankhöhe ist
                 if(gesamthoeheTank <= fuellhoeheTank) {
                     fehler(0);
                 }
-                //Volumenberechnung der eingefuellten Fluessigkeit
+                System.out.println("Dichte der Fluessigkeit (Werte müssen zwischen 1000 und 1300 liegen): ");
                 dichteFluessigkeit = Double.parseDouble(scanner.nextLine());
                 if (dichteFluessigkeit < 1000 || dichteFluessigkeit > 1300) {
                     fehler(1);
@@ -45,6 +44,7 @@ public class Main {
             } catch (Exception e) {
                 fehler(0);
             }
+            //Volumenberechnung der eingefuellten Fluessigkeit
             fuellstandTank = Math.PI * (((durchmesserTank / 2) * (durchmesserTank / 2)) * fuellhoeheTank);
             //Volumenberechnung des gesamten Gefaeßes
             gesamtVolumenTank = Math.PI * (((durchmesserTank / 2) * (durchmesserTank / 2)) * gesamthoeheTank);
@@ -98,14 +98,11 @@ public class Main {
                         fluessigkeitsVolumen();
                     }
                     //wenn nein, dann einfach ueberspringen und zum naechsten Schritt
-                } else {
-                    System.out.println("Die Kugel schwimmt nicht.");
-                    fluessigkeitsVolumen();
                 }
 
-            } else if (!(userEingabe.equalsIgnoreCase("nein"))) {
+            } else if (!((userEingabe.equalsIgnoreCase("nein")) || (userEingabe.equalsIgnoreCase("ja")))) {
                 fehler(2);
-            } else if (userEingabe.equalsIgnoreCase("nein")) {
+            } else {
                 //wenn keine Kugel hinzugefuegt werden soll
                 //Programm beenden.
                 System.out.println("Programm wird beendet.");
@@ -134,7 +131,7 @@ public class Main {
                 System.out.println("Damit laeuft das Wasser ueber und der Behaelter ist voll.");
             } else {
                 //Wenn nicht, Werte ausgeben und neue Kugel anbieten
-                System.out.println("Der neue Fluessigkeitsvolumen betraegt " + Math.round(fuellstandGesamt));
+                System.out.println("Der neue Fluessigkeitsvolumen betraegt " + Math.round(fuellstandGesamt) + " Kubikzentimeter.");
                 System.out.println("Es kann noch " + (Math.round(gesamtVolumenTank - fuellstandGesamt)) + " an Volumen hinzugefügt werden.");
                 fuellstandTank = fuellstandGesamt;
                 try {
